@@ -5,7 +5,16 @@ EXPOSE 5000
 ARG MLFLOW_VERSION
 ARG SERVER_DIR=/server
 
-RUN pip install mlflow==$MLFLOW_VERSION psycopg2==2.8.* && \
+RUN pip install --upgrade pip \
+    && pip install pathlib2 \
+    && pip install mlflow \
+    && pip install numpy \
+    && pip install scipy \
+    && pip install pandas \
+    && pip install scikit-learn \
+    && pip install cloudpickle \
+    && pip install psycopg2 \
+    && pip install pandas_datareader>=0.8.0 && \
     mkdir -p ${SERVER_DIR}
 
 COPY ./scripts/wait-for-it.sh ${SERVER_DIR}/
